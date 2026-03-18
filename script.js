@@ -1,5 +1,7 @@
+// Load data from localStorage
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
+// Grade function
 function calculateGrade(marks) {
     if (marks >= 90) return "A";
     else if (marks >= 75) return "B";
@@ -7,6 +9,7 @@ function calculateGrade(marks) {
     else return "Fail";
 }
 
+// Real-time validation
 $("#name, #email, #marks").keyup(function () {
     let valid = true;
 
@@ -35,6 +38,7 @@ $("#name, #email, #marks").keyup(function () {
     $("#submitBtn").prop("disabled", !valid);
 });
 
+// Submit form (Add + Edit)
 $("#studentForm").submit(function (e) {
     e.preventDefault();
 
@@ -60,6 +64,9 @@ $("#studentForm").submit(function (e) {
 
     displayStudents();
 
+    // Save to localStorage
+    localStorage.setItem("students", JSON.stringify(students));
+
     $("#successMsg").hide().text("Saved Successfully!").fadeIn();
 
     $("#studentForm")[0].reset();
@@ -67,6 +74,7 @@ $("#studentForm").submit(function (e) {
     $("#submitBtn").prop("disabled", true);
 });
 
+// Display students
 function displayStudents() {
     let output = "";
 
@@ -87,6 +95,7 @@ function displayStudents() {
     $("#studentTable").html(output);
 }
 
+// Edit student
 function editStudent(index) {
     let s = students[index];
 
@@ -98,13 +107,18 @@ function editStudent(index) {
     $("#submitBtn").prop("disabled", false);
 }
 
+// Delete student
 function deleteStudent(index) {
     if (confirm("Delete this student?")) {
         students.splice(index, 1);
         displayStudents();
+
+        // Update localStorage after delete
+        localStorage.setItem("students", JSON.stringify(students));
     }
 }
 
+// Download PDF
 function downloadPDF() {
     const { jsPDF } = window.jspdf;
     let doc = new jsPDF();
@@ -123,4 +137,7 @@ function downloadPDF() {
     });
 
     doc.save("students.pdf");
-          }
+}
+
+// Show data on page load
+displayStudents();
