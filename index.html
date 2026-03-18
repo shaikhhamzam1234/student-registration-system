@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration System</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🎓 Student Registration System</h2>
+
+<form id="studentForm">
+
+    <input type="hidden" id="editIndex">
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <span class="error" id="nameError"></span>
+
+    <input type="email" id="email" placeholder="Enter Email">
+    <span class="error" id="emailError"></span>
+
+    <input type="number" id="marks" placeholder="Enter Marks">
+    <span class="error" id="marksError"></span>
+
+    <button type="submit" id="submitBtn" disabled>Add Student</button>
+
+</form>
+
+<p id="successMsg" class="success"></p>
+
+<button onclick="downloadPDF()">📄 Download PDF</button>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Marks</th>
+<th>Grade</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="studentTable"></tbody>
+</table>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
