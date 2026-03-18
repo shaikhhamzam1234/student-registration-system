@@ -1,4 +1,4 @@
-let students = [];
+let students = JSON.parse(localStorage.getItem("students")) || [];
 
 function calculateGrade(marks) {
     if (marks >= 90) return "A";
